@@ -12,8 +12,8 @@ async def create_document(document: schemas.DocumentCreate, db: AsyncSession = D
     return await crud.create_document(db=db, document=document)
 
 @router.put("/documents/{document_id}", response_model=schemas.Document)
-async def update_document(document: schemas.DocumentUpdate, db: AsyncSession = Depends(get_db)):
-    return await crud.update_document(db=db, document=document)
+async def update_document(document: schemas.DocumentUpdate, document_id: int, db: AsyncSession = Depends(get_db)):
+    return await crud.update_document(db=db, document=document, document_id=document_id)
 
 @router.get("/documents/{document_id}", response_model=schemas.Document)
 async def get_document(document_id: int, db: AsyncSession = Depends(get_db)):
